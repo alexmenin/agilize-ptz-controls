@@ -70,7 +70,7 @@ export const showAppShell = () => {
 
 export const registerAppLifecycle = () => {
   app.on("window-all-closed", () => {
-    if (platformConfig.closeToTray && isQuitting) {
+    if (isQuitting || process.platform === "linux") {
       app.quit();
     }
   });

@@ -114,12 +114,13 @@ export const registerCameraIpc = (): void => {
   ipcMain.handle("agilize:thumbnails", (_event, request: ThumbnailRequest) =>
     thumbnails.request(request),
   );
+  const previewBinary = process.platform === "win32" ? "go2rtc.exe" : "go2rtc";
   const preview = new PreviewService(
     configService,
     app.isPackaged
-      ? path.join(process.resourcesPath, "go2rtc", "go2rtc.exe")
+      ? path.join(process.resourcesPath, "go2rtc", previewBinary)
       : (process.env.AGILIZE_GO2RTC_PATH ??
-          path.join(__dirname, "../../assets/go2rtc/go2rtc.exe")),
+          path.join(__dirname, "../../assets/go2rtc", previewBinary)),
   );
   ipcMain.handle("agilize:operator-state", () => router.state());
   const remote = new RemoteServer(

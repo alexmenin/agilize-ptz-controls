@@ -92,5 +92,8 @@
     {
       "name": "Dutch Drone Squad / Panevo — projeto original"
     }
-  ]
+  ],
+  "overrides": {
+    "esquery": "1.7.0"
+  }
 }

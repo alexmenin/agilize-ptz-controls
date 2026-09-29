@@ -69,3 +69,37 @@ O script de preparação baixa go2rtc 1.9.14 do projeto oficial e verifica SHA-2
 ## Licença e créditos
 
 Licença MIT, com atribuição original em [LICENSE](LICENSE). Derivado de [Panevo](https://github.com/dutchdronesquad/panevo), Dutch Drone Squad / Klaas Schoute, base v0.1.2. go2rtc de Alexey Khit, MIT; licença em assets/go2rtc/LICENSE. Electron/Chromium e demais dependências mantêm suas licenças. atem-connection e pngjs têm versões registradas no package-lock.json. Integração independente, sem patrocínio ou certificação da Blackmagic Design.
+
+## Linux Mint e Ubuntu (64 bits)
+
+O instalador Linux é `.deb` (DMG é exclusivo do macOS). Baixe
+`agilize-ptz-controls_1.8.0_amd64.deb` nos **Releases**, abra o terminal na pasta
+do arquivo e instale:
+
+```bash
+sudo apt install ./agilize-ptz-controls_1.8.0_amd64.deb
+agilize-ptz-controls
+```
+
+Também é possível abrir pelo menu de aplicativos. Requer Linux x86-64 com
+ambiente gráfico, Ubuntu 22.04 ou posterior / Mint 21 ou posterior. O pacote
+inclui Electron e o servidor de preview RTSP. Fechar a janela no Linux encerra
+o programa e o acesso pelo celular. Não execute o aplicativo com `sudo`.
+O pacote preserva o sandbox e inclui perfil AppArmor específico para Ubuntu
+24.04/Mint 22; não desativa a proteção do sistema.
+
+Instalação no equipamento e comunicação real ATEM/PTZ precisam de validação
+local. Este é um pacote independente, **não está no repositório oficial Ubuntu
+nem em um PPA**. Para remover: `sudo apt remove agilize-ptz-controls`.
+
+Para compilar em Linux x64, com Node.js 22.12+ e `dpkg-deb`:
+
+```bash
+npm ci
+node scripts/prepare-preview.cjs linux
+npm run package -- --platform=linux --arch=x64
+node scripts/build-linux-deb.cjs
+```
+
+O `.deb` é gerado em `dist/`. Para preparar novamente o preview Windows,
+use `node scripts/prepare-preview.cjs win32`.

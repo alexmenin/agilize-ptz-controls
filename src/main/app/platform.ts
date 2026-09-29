@@ -26,7 +26,7 @@ const platformConfigs: Partial<Record<NodeJS.Platform, PlatformConfig>> = {
     windowIconPath: windowsIconPath,
   },
   linux: {
-    closeToTray: true,
+    closeToTray: false,
     enableTray: true,
     trayIconPath,
     trayIconSize: 16,
