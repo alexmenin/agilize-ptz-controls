@@ -1,0 +1,22 @@
+{
+  "appId": "com.agilize.ptzcontrols",
+  "productName": "Agilize PTZ Controls",
+  "directories": {
+    "output": "dist"
+  },
+  "win": {
+    "target": [
+      {
+        "target": "portable",
+        "arch": ["x64"]
+      }
+    ],
+    "signAndEditExecutable": false,
+    "icon": "assets/icon.ico"
+  },
+  "portable": {
+    "artifactName": "Agilize-PTZ-Controls-1.7.0.exe",
+    "requestExecutionLevel": "user",
+    "splashImage": "assets/splash.bmp"
+  }
+}

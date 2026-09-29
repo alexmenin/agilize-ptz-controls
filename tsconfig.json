@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "types": ["node"],
+    "paths": {
+      "@/assets/*": ["./assets/*"],
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "src",
+    "tests",
+    "forge.config.ts",
+    "forge.env.d.ts",
+    "vite.*.config.ts",
+    "vitest.config.ts"
+  ]
+}
