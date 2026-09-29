@@ -1,7 +1,7 @@
 {
   "name": "agilize-ptz-controls",
   "productName": "Agilize PTZ Controls",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "Controle PTZ multicâmera com presets e acesso pelo celular na rede local.",
   "main": ".vite/build/main.js",
   "private": true,

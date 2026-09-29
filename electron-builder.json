@@ -15,7 +15,7 @@
     "icon": "assets/icon.ico"
   },
   "portable": {
-    "artifactName": "Agilize-PTZ-Controls-1.7.0.exe",
+    "artifactName": "Agilize-PTZ-Controls-1.8.0.exe",
     "requestExecutionLevel": "user",
     "splashImage": "assets/splash.bmp"
   }

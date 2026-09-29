@@ -1,7 +1,0 @@
-node_modules
-.vite
-out
-dist
-coverage
-
-src/renderer/components/ui

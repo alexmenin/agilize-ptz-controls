@@ -1,59 +1,71 @@
 # Agilize PTZ Controls
 
-**Câmeras, enquadramentos e nomes na tela em uma única mesa de operação.**
+<picture><source media="(prefers-color-scheme: dark)" srcset="src/renderer/assets/agilize-white.png"><img src="src/renderer/assets/agilize-dark.png" alt="Agilize Soluções Digitais" width="320"></picture>
 
-Desenvolvido pela **[Agilize Soluções Digitais](https://agilizesolucoesdigitais.com.br)**, a partir do projeto aberto Panevo.
+**Controle PTZ, presets visuais, GCs e transmissão pelo ATEM em uma mesa de operação.**
 
-## Baixar a versão 1.7.0
+Desenvolvido por [Agilize Soluções Digitais](https://agilizesolucoesdigitais.com.br), a partir do projeto aberto Panevo. Para eventos, entrevistas, câmaras municipais, aulas e outras produções.
 
-[**Abrir downloads, notas e fotos da versão 1.7.0**](https://github.com/alexmenin/agilize-ptz-controls/releases/tag/v1.7.0)
+## Download e instalação
 
-- **Agilize-PTZ-Controls-Setup-1.7.0.exe:** instalador para Windows x64, recomendado para uso diário.
-- **Agilize-PTZ-Controls-1.7.0.exe:** versão portátil.
-- **Agilize-PTZ-Controls-Source-1.7.0.zip:** código completo e guias ilustrados.
-- **SHA256SUMS.txt:** verificação de integridade.
+Baixe o instalador **Agilize-PTZ-Controls-Setup-1.8.0.exe** nos [Releases](https://github.com/alexmenin/agilize-ptz-controls/releases). Também há um EXE portátil. Não precisa instalar Node.js ou Python para usar o aplicativo.
 
-> A importação das pastas para a branch main ainda está pendente. Para consultar todo o código ou compilar, baixe o arquivo **Agilize-PTZ-Controls-Source-1.7.0.zip** nos Assets da Release; os arquivos automáticos “Source code” do GitHub ainda não contêm o projeto completo.
+1. Execute o instalador e abra o Agilize.
+2. Em **Câmeras**, cadastre IP, porta e protocolo VISCA. Informe ONVIF e RTSP quando utilizados pela câmera.
+3. Importe os presets existentes e confira a lista. Importar não grava posições físicas na câmera; gravar uma posição exige confirmação e pode substituir uma memória existente.
+4. Acesse pelo celular usando o endereço exibido no aplicativo, na mesma rede. Mantenha o computador e o Agilize ligados.
+5. Adicione o IP do ATEM em **ATEM Mini** e associe cada câmera à sua entrada HDMI.
 
-![Mesa de operação](https://github.com/user-attachments/assets/a01d44f1-017b-4ec8-8aec-d2d60acf9ef7)
+## Painel de transmissão
 
-As capturas usam equipamentos e nomes fictícios. Vídeo indisponível é uma condição da demonstração.
+![Painel com tema claro](assets/screenshots/painel-claro.png)
 
-## O que o sistema faz
+- Multiview RTSP e miniatura JPG de referência por preset.
+- Um clique ou Enter aciona o preset; as setas apenas navegam, sem movimentar a câmera.
+- **Fixar preset:** botão direito no computador ou toque prolongado no celular; escolha Fixar preset. Os fixados ficam no início e são lembrados neste dispositivo/navegador. O mesmo menu permite desafixar. Abrir esse menu não aciona a câmera.
+- Celular vertical: **duas colunas**. Horizontal: **até quatro colunas**.
+- Faixa de GCs no fluxo da página, sem ficar presa ao topo.
+- Logo branca no tema escuro e logo dark no claro.
 
-- Controle PTZ por joystick, zoom, foco, velocidade e parada, com preferência por VISCA.
-- Presets de várias câmeras com busca, rolagem, setas e acionamento com um clique ou Enter/Espaço. Passar o mouse ou navegar não movimenta a câmera.
-- JPG de referência do último acionamento e multiview RTSP.
-- Interface responsiva no celular pela mesma rede, com o computador e o Agilize ligados.
-- Integração ATEM Mini: Program/Preview, associação de câmera à HDMI e corte após espera de 1 segundo.
-- GCs de vereadores, cores e moldura com até 8 PNGs fora da área do nome. Salvar atualiza automaticamente as artes no ATEM.
-- Preset sem GC retira o nome e mantém a moldura.
-
-A lista de memórias ocupadas não é uma consulta VISCA universal. A descoberta depende dos recursos da câmera ou da configuração importada. **Importar presets não grava posições na câmera.**
-
-## Instalação e primeira configuração
-
-1. Baixe e execute o instalador nos Assets da Release. Não é necessário instalar Node.js ou Python.
-2. Abra o Agilize e acesse **Câmeras**. Cadastre nome, endereço IP e configuração VISCA conforme o equipamento. Informe ONVIF e RTSP quando utilizados.
-3. Conecte e importe os presets existentes. Confira os nomes e teste um enquadramento em ambiente de preparação antes da transmissão.
-4. No celular, conectado à mesma rede, abra o endereço exibido pelo aplicativo. O computador deve permanecer ligado.
-5. Para usar os GCs, adicione o ATEM pelo IP da rede e associe cada câmera à entrada HDMI correspondente.
-6. Cadastre os vereadores e vincule os GCs aos presets desejados. Em **Cores e logotipos**, ajuste as cores e posicione os PNGs da moldura. Salvar envia as artes automaticamente ao ATEM conectado.
-
-![Cadastro e edição de câmera](https://github.com/user-attachments/assets/b4cd167c-4a28-449e-ab31-b3d8c02d9b65)
-
-![Cores e logotipos](https://github.com/user-attachments/assets/1a2e1ad7-f5e7-4f57-afe4-bc2d005b6522)
+![Celular horizontal](assets/screenshots/painel-horizontal.png)
 
 ## GCs e moldura
 
-Ao atualizar uma arte que está no ar, a integração retira temporariamente o chaveador durante o envio e restaura a composição ao concluir. A moldura também pode desaparecer durante essa transferência porque utiliza o mesmo chaveador.
+Use **Adicionar GC**, preencha **Descrição 1** e, se desejar, **Descrição 2**. Os cadastros antigos são preservados. Vincule um GC a um preset; sem vínculo, o preset retira o GC anterior e mantém a moldura.
 
-A moldura reserva um espaço próprio de mídia. Os espaços dos GCs ficam reservados até sua exclusão. O seletor oferece somente espaços disponíveis; artes externas são preservadas.
+Em **Cores e logotipos**, escolha cores, PNG junto ao texto e até oito imagens da moldura. Arraste para posicionar; arraste a alça do canto para redimensionar proporcionalmente, ou ajuste largura/altura numericamente. A área do GC permanece reservada.
 
-## Guias completos e validação
+Salvar envia automaticamente as artes ao ATEM. Atualizações retiram temporariamente o chaveador do ar e restauram a composição ao concluir; a moldura pode desaparecer durante esse envio. Cada GC e a moldura reservam um espaço de mídia. Artes externas são preservadas.
 
-O ZIP de código completo inclui os guias ilustrados em **docs/instalacao-configuracao.md**, **docs/atem-gc.md** e **docs/manual.md**, além das instruções de compilação em **docs/architecture/development-agilize.md**.
+Use saída 1080 HD para GCs. A integração utiliza Media Player 1 e o primeiro chaveador, compartilhado com PiP/chroma. Ao acionar um preset, o corte HDMI/GC espera 1 segundo; esse atraso não confirma a chegada física da PTZ.
 
-A versão passou por 145 testes automatizados, checagem de tipos, lint e conferência visual desktop/mobile. A operação em câmeras/ATEM físicos e a execução nativa no Windows ainda precisam de validação no equipamento real. Os executáveis não possuem assinatura digital.
+## Transmitir pelo ATEM
 
-Consulte [as mudanças](CHANGELOG.md), [segurança](SECURITY.md), [licença MIT](LICENSE) e [créditos de terceiros](THIRD_PARTY_NOTICES.md).
+1. Clique **TRANSMITIR**. Use o destino atual do ATEM ou configure um servidor RTMP/RTMPS, nome do destino, chave e bitrate.
+2. O ATEM só informa seu destino atual pela conexão. Para listar as plataformas do ATEM Software Control, importe seu arquivo **Streaming.xml** no próprio diálogo.
+3. Clique **Iniciar transmissão**. O botão mostra **AO VIVO** quando o ATEM confirma esse estado. Mudanças feitas no equipamento também são refletidas no app.
+4. Clique **AO VIVO** e depois **Confirmar e encerrar no ATEM** para terminar. Cancelar não envia o comando.
+
+Requer modelo com encoder integrado, como ATEM Mini Pro, conexão de internet no ATEM e destino válido. Não transforma um ATEM Mini sem encoder em transmissor. A chave existente permanece oculta; chaves digitadas são enviadas ao ATEM, sem inclusão no arquivo de configuração do Agilize. Use uma rede local confiável; o acesso móvel HTTP não deve ser exposto diretamente à internet.
+
+## Compilar e contribuir
+
+Use Node.js 24 e npm:
+
+```sh
+npm ci
+node scripts/prepare-preview.cjs
+npm start
+npm run type
+npm test
+npm run lint
+npm run package -- --platform=win32 --arch=x64
+```
+
+O script de preparação baixa go2rtc 1.9.14 do projeto oficial e verifica SHA-256. O executável auxiliar já acompanha o instalador distribuído. Para o portátil, use electron-builder 26.0.12 com o pacote Forge e electron-builder.json; para o instalador, execute NSIS com scripts/windows-installer.nsi. Configurações pessoais, credenciais, caches e builds não pertencem ao repositório.
+
+149 testes automatizados passaram. A interface foi verificada com equipamentos simulados, incluindo fixação, orientação do celular e confirmação de encerramento. Streaming, movimentos PTZ e saída do ATEM precisam de validação nos equipamentos físicos; execução nativa no Windows também não foi testada neste ambiente Linux. Executáveis sem assinatura digital.
+
+## Licença e créditos
+
+Licença MIT, com atribuição original em [LICENSE](LICENSE). Derivado de [Panevo](https://github.com/dutchdronesquad/panevo), Dutch Drone Squad / Klaas Schoute, base v0.1.2. go2rtc de Alexey Khit, MIT; licença em assets/go2rtc/LICENSE. Electron/Chromium e demais dependências mantêm suas licenças. atem-connection e pngjs têm versões registradas no package-lock.json. Integração independente, sem patrocínio ou certificação da Blackmagic Design.
