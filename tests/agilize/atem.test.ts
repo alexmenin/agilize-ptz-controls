@@ -576,6 +576,80 @@ describe("ATEM streaming", () => {
     };
     return result;
   };
+  it("publishes asynchronous streaming updates without any camera or GC events", async () => {
+    const { service, fake } = await setup();
+    const receive = vi.fn();
+    const unsubscribe = service.subscribe(receive);
+    fake.changed("streaming.status");
+    await vi.waitFor(() =>
+      expect(receive.mock.lastCall?.[0].streaming.state).toBe("idle"),
+    );
+    for (const [state, label] of [
+      [Enums.StreamingStatus.Connecting, "connecting"],
+      [Enums.StreamingStatus.Streaming, "live"],
+      [Enums.StreamingStatus.Stopping, "stopping"],
+      [Enums.StreamingStatus.Idle, "idle"],
+    ] as const) {
+      receive.mockClear();
+      fake.state.streaming!.status = {
+        state,
+        error: Enums.StreamingError.None,
+      };
+      fake.changed("streaming.status");
+      await vi.waitFor(() =>
+        expect(receive.mock.lastCall?.[0].streaming.state).toBe(label),
+      );
+    }
+    fake.state.streaming!.service.bitrates = [12500000, 18000000];
+    fake.changed("streaming.service");
+    await vi.waitFor(() =>
+      expect(receive.mock.lastCall?.[0].streaming.bitrates).toEqual([
+        12500000, 18000000,
+      ]),
+    );
+    expect(JSON.stringify(receive.mock.calls)).not.toContain(
+      "dummy-stream-key",
+    );
+    unsubscribe();
+  });
+  it("accepts custom frame-rate bitrates and retains the current hidden key", async () => {
+    const { service, fake } = await setup();
+    const result = await service.request({
+      kind: "startStreaming",
+      settings: {
+        serviceName: "Test",
+        url: "rtmp://example.test/live",
+        bitrates: [12500000, 10500000],
+      },
+    });
+    expect(result.ok).toBe(true);
+    expect(fake.setStreamingService).toHaveBeenCalledWith({
+      serviceName: "Test",
+      url: "rtmp://example.test/live",
+      key: "dummy-stream-key",
+      bitrates: [12500000, 10500000],
+    });
+  });
+  it.each([0, -1, NaN, Infinity, 1.5, 0x100000000])(
+    "rejects an invalid protocol bitrate: %s",
+    async (bitrate) => {
+      const { service, fake } = await setup();
+      expect(
+        (
+          await service.request({
+            kind: "startStreaming",
+            settings: {
+              serviceName: "Test",
+              url: "rtmp://example.test/live",
+              bitrates: [bitrate, 6000000],
+            },
+          })
+        ).ok,
+      ).toBe(false);
+      expect(fake.setStreamingService).not.toHaveBeenCalled();
+      expect(fake.startStreaming).not.toHaveBeenCalled();
+    },
+  );
   it("starts the configured destination, confirms status and never exposes the key", async () => {
     const { service, fake } = await setup();
     expect((await service.request({ kind: "startStreaming" })).ok).toBe(true);

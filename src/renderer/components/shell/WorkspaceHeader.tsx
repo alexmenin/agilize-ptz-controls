@@ -33,7 +33,7 @@ export const WorkspaceHeader = ({
       <div className="header-brand">
         <strong>
           <span>
-            PTZ CONTROLS <b>1.8.0</b>
+            PTZ CONTROLS <b>1.8.1</b>
           </span>
         </strong>
         <h2>{onBack ? title : "Estúdio de operação"}</h2>

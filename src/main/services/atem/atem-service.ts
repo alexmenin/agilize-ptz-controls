@@ -481,7 +481,7 @@ export class AtemService {
       if (
         current() &&
         paths.some((p) =>
-          /^(video|media|info|inputs|settings.videoMode)/.test(p),
+          /^(video|media|info|inputs|streaming|settings.videoMode)/.test(p),
         )
       )
         this.schedule();
@@ -662,9 +662,8 @@ export class AtemService {
             !Array.isArray(settings.bitrates) ||
             settings.bitrates.length !== 2 ||
             !settings.bitrates.every(
-              (n) => Number.isInteger(n) && n >= 100000 && n <= 70000000,
-            ) ||
-            settings.bitrates[0] > settings.bitrates[1]
+              (n) => Number.isInteger(n) && n > 0 && n <= 0xffffffff,
+            )
           )
             throw new Error(
               "Confira servidor, nome, chave e bitrate da transmissão.",

@@ -8,7 +8,7 @@ Desenvolvido por [Agilize Soluções Digitais](https://agilizesolucoesdigitais.c
 
 ## Download e instalação
 
-Baixe o instalador **Agilize-PTZ-Controls-Setup-1.8.0.exe** nos [Releases](https://github.com/alexmenin/agilize-ptz-controls/releases). Também há um EXE portátil. Não precisa instalar Node.js ou Python para usar o aplicativo.
+Baixe o instalador **Agilize-PTZ-Controls-Setup-1.8.1.exe** nos [Releases](https://github.com/alexmenin/agilize-ptz-controls/releases). Também há um EXE portátil. Não precisa instalar Node.js ou Python para usar o aplicativo.
 
 1. Execute o instalador e abra o Agilize.
 2. Em **Câmeras**, cadastre IP, porta e protocolo VISCA. Informe ONVIF e RTSP quando utilizados pela câmera.
@@ -73,11 +73,11 @@ Licença MIT, com atribuição original em [LICENSE](LICENSE). Derivado de [Pane
 ## Linux Mint e Ubuntu (64 bits)
 
 O instalador Linux é `.deb` (DMG é exclusivo do macOS). Baixe
-`agilize-ptz-controls_1.8.0_amd64.deb` nos **Releases**, abra o terminal na pasta
+`agilize-ptz-controls_1.8.1_amd64.deb` nos **Releases**, abra o terminal na pasta
 do arquivo e instale:
 
 ```bash
-sudo apt install ./agilize-ptz-controls_1.8.0_amd64.deb
+sudo apt install ./agilize-ptz-controls_1.8.1_amd64.deb
 agilize-ptz-controls
 ```
 
@@ -103,3 +103,12 @@ node scripts/build-linux-deb.cjs
 
 O `.deb` é gerado em `dist/`. Para preparar novamente o preview Windows,
 use `node scripts/prepare-preview.cjs win32`.
+
+## Correções 1.8.1
+
+- Bitrate digitável em Mbps, inclusive no destino atual do ATEM, com valores
+  independentes para até 30 fps e acima de 30 fps. O valor precisa ser aceito
+  pelo equipamento e pelo serviço de transmissão. Não há lista fixa de qualidades.
+- Status de transmissão atualizado pelos eventos do ATEM, incluindo início e
+  encerramento pelo painel físico ou pelo ATEM Software Control, no desktop e celular.
+- A confirmação de envio do comando não é tratada como confirmação de estar ao vivo.

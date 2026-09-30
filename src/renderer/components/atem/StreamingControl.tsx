@@ -37,7 +37,14 @@ export function StreamingControl() {
           ? { kind: "stopStreaming", confirmed: true }
           : {
               kind: "startStreaming",
-              ...(mode === "current" ? {} : { settings: draft }),
+              settings:
+                mode === "current"
+                  ? {
+                      serviceName: stream?.serviceName ?? "",
+                      url: stream?.url ?? "",
+                      bitrates: draft.bitrates,
+                    }
+                  : draft,
             },
       );
       setDraft((d) => ({ ...d, key: "" }));
@@ -194,27 +201,41 @@ export function StreamingControl() {
                       }
                     />
                   </label>
-                  <label>
-                    Qualidade
-                    <select
-                      value={draft.bitrates.join(",")}
-                      onChange={(e) =>
-                        setDraft({
-                          ...draft,
-                          bitrates: e.target.value.split(",").map(Number) as [
-                            number,
-                            number,
-                          ],
-                        })
-                      }
-                    >
-                      <option value="3000000,4500000">3–4,5 Mbps</option>
-                      <option value="4500000,6000000">4,5–6 Mbps</option>
-                      <option value="6000000,9000000">6–9 Mbps</option>
-                    </select>
-                  </label>
                 </>
               )}
+              <fieldset>
+                <legend>Bitrate personalizado (Mbps)</legend>
+                {([0, 1] as const).map((index) => (
+                  <label key={index}>
+                    {index === 0 ? "Até 30 fps" : "Acima de 30 fps (50/60)"}
+                    <input
+                      type="number"
+                      required
+                      min="0.000001"
+                      max="4294.967295"
+                      step="0.000001"
+                      value={
+                        Number.isFinite(draft.bitrates[index])
+                          ? draft.bitrates[index] / 1000000
+                          : ""
+                      }
+                      onChange={(e) => {
+                        const bitrates: [number, number] = [...draft.bitrates];
+                        bitrates[index] = Math.round(
+                          e.target.valueAsNumber * 1000000,
+                        );
+                        setDraft({ ...draft, bitrates });
+                      }}
+                    />
+                  </label>
+                ))}
+                <p>
+                  O ATEM usa o valor correspondente à taxa de quadros. Para usar
+                  o mesmo bitrate em qualquer taxa, preencha os dois campos com
+                  o mesmo valor. A aceitação depende do equipamento e do
+                  destino.
+                </p>
+              </fieldset>
               <details>
                 <summary>Importar plataformas do ATEM Software Control</summary>
                 <p>

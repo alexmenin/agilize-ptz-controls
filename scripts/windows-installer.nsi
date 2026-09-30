@@ -1,15 +1,15 @@
 Unicode true
 Name "Agilize PTZ Controls"
-OutFile "../dist/Agilize-PTZ-Controls-Setup-1.8.0.exe"
+OutFile "../dist/Agilize-PTZ-Controls-Setup-1.8.1.exe"
 InstallDir "$LOCALAPPDATA\Programs\Agilize PTZ Controls"
 RequestExecutionLevel user
 SetCompressor zlib
 Icon "../assets/icon.ico"
 UninstallIcon "../assets/icon.ico"
-VIProductVersion "1.8.0.0"
+VIProductVersion "1.8.1.0"
 VIAddVersionKey "ProductName" "Agilize PTZ Controls"
 VIAddVersionKey "FileDescription" "Instalador Agilize PTZ Controls"
-VIAddVersionKey "FileVersion" "1.8.0"
+VIAddVersionKey "FileVersion" "1.8.1"
 VIAddVersionKey "LegalCopyright" "Agilize; derivado de Panevo, MIT"
 Page instfiles
 UninstPage uninstConfirm
@@ -23,7 +23,7 @@ Section
   CreateShortcut "$SMPROGRAMS\Agilize PTZ Controls\Agilize PTZ Controls.lnk" "$INSTDIR\Agilize PTZ Controls.exe"
   WriteUninstaller "$INSTDIR\Uninstall.exe"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AgilizePTZControls" "DisplayName" "Agilize PTZ Controls"
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AgilizePTZControls" "DisplayVersion" "1.8.0"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AgilizePTZControls" "DisplayVersion" "1.8.1"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AgilizePTZControls" "UninstallString" '"$INSTDIR\Uninstall.exe"'
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AgilizePTZControls" "DisplayIcon" "$INSTDIR\Agilize PTZ Controls.exe"
   Exec '"$INSTDIR\Agilize PTZ Controls.exe"'
